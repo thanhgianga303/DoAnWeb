@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <title>Giỏ hàng</title>
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+      <link rel="stylesheet" href="style.css">
+      <link rel="stylesheet" href="giohang.css">
+      <!-- <script type="text/javascript" src="javascript.js"></script> -->
+      <!-- <script type="text/javascript" src="index.js"></script> -->
+      <script type="text/javascript" src="giohang.js"></script>
+     <!--  <script type="text/javascript" src="chitietsanpham.js"></script> -->
+      <script type="text/javascript" src="login.js"></script>
+      <script type="text/javascript" src="Dangky.js"></script>
+      <script>
+       window.onload = function() {
+         var d= new Date();
+         var stt;
+         var s=`<tr>
+               <td>STT</td>
+               <td>Sản phẩm</td>
+               <td>Giá</td>
+               <td>Thời Gian</td>
+               <td>Xóa</td>
+            </tr>`;
+         // var g="";
+         // console.log(localStorage.getItem("listSanPham"));
+         var l = JSON.parse(localStorage.getItem("listSanPham"))||[];
+         var tongtien=0;
+         var tien="";
+         for(var i=0 ; i < l.length; i++)
+            {  
+               tien=l[i].gia;//gán biến tien=chuỗi 150.000
+               
+               tongtien += parseInt(tien.split(".").join(""));//căt dấu chấm chuyển thành khoảng trắng sau đó chuyển về kiểu Int
+               
+               stt=i+1;
+               s = s+'<tr><td>'+stt+'</td><td>'+l[i].ten+'</td><td>'+l[i].gia+'đ</td><td>'+d+'</td><td style="text-align:center"><a href="giohang.html" onclick="xoaSanPham('+i+');" ><i class="fas fa-trash-alt"></i></a></td></tr>';
+            
+         }
+         // tongtien.split(".").join(".").toLocaleString();
+            document.getElementById("sanpham").innerHTML = s+`<tr>
+               <td></td>
+               <td></td>
+               <td>Tổng tiền:`+tongtien+`đ</td>
+               <td></td>
+               <td></td>
+            </tr>`;
+            // document.getElementById("giasp").innerHTML = g;
+       }
+    </script>
+</head>
+<body>
+<div class="clear">
+         <div id="header">
+            <div style="width: 600px;float: left;text-align: center;">
+               <div style="text-align: center;"><img src="img/logo.jpg"/></div>
+               <p style="font-size: 30px; color:black">THỜI TRANG CAO CẤP<p>
+            </div>
+            <!-- End Logo -->
+            <div style="width:auto;float: right">
+               <div style="margin-top:70px">
+                  
+                     <input name="search" type="search" id="search_id" size="50px" autocomplete="off" />
+                     <!-- <a href="index.html?search=&0"> -->
+                     <input type="button" id="button" value="TÌM KIẾM SẢN PHẨM" onclick="change();" />
+               </div>
+               <!-- End search -->
+               <div style="margin-top:10px;width:748px">
+                  <div style="float: left;width: 110px;color:#777">Giao hàng tận nơi</div>
+                  <div style="float: left;width: 130px;color:#777">Liên hệ<br>(0375298096)</div>
+                  <div style="float: left;width: 110px;color:#777">Đổi hàng trong 5 ngày</div>
+                  <div style="float: left;width: 150px;margin-left:10px"><a href="LOGIN.html"><i class="fa fa-user"></i><span style="color:black"><b  id="tendangnhap">Tài khoản<b></span><div></div></a></div>
+                  <div style="float: left;width: 150px"><a href="giohang.html"><i class="fa fa-shopping-cart"></i><span style="color:black"><b>Giỏ hàng</b></span></a></div>
+               </div>
+               <!-- End thong tin -->
+            </div>
+         </div>
+         <!-- End header -->
+         <div style=" width: 1348px">
+            <hr/>
+         </div>
+         <div id="aside"></div>
+         <div style="width: 1348px">
+            <hr/>
+         </div>
+         <table style="border:solid 5px #ddd;width: 1000px;color:white;font-size:30px;margin: 0 auto;text-align: center" id="sanpham">
+         </table>
+         <div style="width: 1348px;text-align: center"><a href="#" onclick="thanhToan()"; style="color:black;font-size: 30px;font-weight: 500;text-decoration: none;border-radius: 5px;border:solid 1px black">Thanh toán</a></div>
+      </div>
+      
+
+
+
+	</body>
